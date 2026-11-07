@@ -138,13 +138,31 @@ npm run compile   # tsc -> out/
 
 不启动 VS Code 也可以单独看 webview 的渲染效果：用浏览器直接打开 `media/preview.html`，它用一份 mock 数据和一个假的 `acquireVsCodeApi` 驱动同一套 `main.js` / `style.css`。
 
-## 打包
+## 构建 .vsix
+
+前置：Node.js ≥ 18 与 npm（本项目在 Node v24 上验证过），本机不需要装 VS Code。
 
 ```bash
-npx vsce package
+# 1. 安装依赖（含 typescript 和 @vscode/vsce）
+npm install
+
+# 2. 编译 TypeScript，产出 out/extension.js
+npm run compile
+
+# 3. 打包
+npx vsce package        # 等价于 npm run package
 ```
 
-产出的 `.vsix` 是平台无关的：扩展只有 TypeScript 编译产物和静态资源，没有原生模块，Linux 上打包的包可以直接装到 Apple Silicon 的 macOS 上。
+执行完当前目录会生成 `jsonl-for-vscode-<version>.vsix`，版本号取自 `package.json` 的 `version`。
+
+几点说明：
+
+- `vsce package` 会先触发 `package.json` 里的 `vscode:prepublish`（也就是 `npm run compile`），所以第 2 步可以省略；单独跑一次只是为了让编译错误更早暴露。
+- **本地打包不需要登录，也不需要 Personal Access Token**；只有 `vsce publish` 发布到 Marketplace 才需要。
+- 进包内容由 `.vscodeignore` 决定：`src/`、`tsconfig.json`、`node_modules/`、`media/preview.html`、`*.map` 会被排除，`out/`、`media/`、`README.md`、`package.json` 会进包。
+- 打包时提示 `LICENSE, LICENSE.md, or LICENSE.txt not found` 属于警告，不影响本地安装。
+- 产物平台无关（纯 JS，无原生模块），Linux 上打好的包可以直接装到 Apple Silicon 的 macOS。
+- 装包方式见上面的[安装](#安装)一节。
 
 ## 目录结构
 
