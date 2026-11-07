@@ -2,7 +2,7 @@
   "name": "jsonl-for-vscode",
   "displayName": "JSONL Viewer",
   "description": "View JSONL/NDJSON (JSON Lines) files line by line: expand any record in place, with virtual scrolling for large files.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "historyliao",
   "license": "MIT",
   "icon": "media/icon.png",
