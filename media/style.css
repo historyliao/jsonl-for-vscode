@@ -1,0 +1,220 @@
+html,
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	background: var(--vscode-editor-background);
+	color: var(--vscode-editor-foreground);
+	font-family: var(--vscode-editor-font-family, monospace);
+	font-size: var(--vscode-editor-font-size, 13px);
+}
+
+#header {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex: 0 0 auto;
+	padding: 3px 10px;
+	border-bottom: 1px solid var(--vscode-panel-border, rgba(128, 128, 128, 0.35));
+	font-family: var(--vscode-font-family);
+	font-size: 12px;
+	color: var(--vscode-descriptionForeground);
+}
+
+#name {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: var(--vscode-foreground);
+	font-weight: 600;
+}
+
+#count {
+	flex: 0 0 auto;
+}
+
+#open-text {
+	margin-left: auto;
+	padding: 2px 8px;
+	border: 1px solid var(--vscode-button-border, transparent);
+	border-radius: 2px;
+	background: var(--vscode-button-secondaryBackground, transparent);
+	color: var(--vscode-button-secondaryForeground, var(--vscode-foreground));
+	font-family: inherit;
+	font-size: 11px;
+	cursor: pointer;
+}
+
+#open-text:hover {
+	background: var(--vscode-button-secondaryHoverBackground, var(--vscode-toolbar-hoverBackground));
+}
+
+#viewport {
+	position: relative;
+	flex: 1 1 auto;
+	overflow: auto;
+}
+
+#viewport::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+#viewport::-webkit-scrollbar-thumb {
+	background: var(--vscode-scrollbarSlider-background, rgba(121, 121, 121, 0.4));
+}
+
+#viewport::-webkit-scrollbar-thumb:hover {
+	background: var(--vscode-scrollbarSlider-hoverBackground, rgba(100, 100, 100, 0.7));
+}
+
+#viewport::-webkit-scrollbar-thumb:active {
+	background: var(--vscode-scrollbarSlider-activeBackground, rgba(191, 191, 191, 0.4));
+}
+
+#viewport::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.notice {
+	max-width: 720px;
+	padding: 12px 16px;
+	color: var(--vscode-descriptionForeground);
+	font-family: var(--vscode-font-family);
+	font-size: 12px;
+	line-height: 1.6;
+}
+
+#layer {
+	position: relative;
+	width: 100%;
+}
+
+.row {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	align-items: flex-start;
+	box-sizing: border-box;
+}
+
+.row.collapsed {
+	height: var(--row-height, 22px);
+	line-height: var(--row-height, 22px);
+	overflow: hidden;
+}
+
+.row:hover {
+	background: var(--vscode-list-hoverBackground, rgba(128, 128, 128, 0.12));
+}
+
+.gutter {
+	display: flex;
+	align-items: center;
+	flex: 0 0 auto;
+	width: calc(var(--digits, 4) * 1ch + 38px);
+	padding-right: 10px;
+	box-sizing: border-box;
+	user-select: none;
+}
+
+.row.expanded .gutter {
+	padding-top: 3px;
+}
+
+.toggle {
+	flex: 0 0 auto;
+	width: 14px;
+	height: 14px;
+	margin: 0 4px 0 6px;
+	padding: 0;
+	border: none;
+	border-radius: 3px;
+	background: transparent;
+	color: var(--vscode-textLink-foreground, #3794ff);
+	font-family: inherit;
+	font-size: 13px;
+	font-weight: 700;
+	line-height: 14px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.toggle:hover {
+	background: var(--vscode-toolbar-hoverBackground, rgba(90, 93, 94, 0.31));
+}
+
+.toggle:disabled {
+	color: var(--vscode-disabledForeground, rgba(128, 128, 128, 0.5));
+	cursor: default;
+	background: transparent;
+}
+
+.ln {
+	flex: 1 1 auto;
+	text-align: right;
+	color: var(--vscode-editorLineNumber-foreground, rgba(128, 128, 128, 0.8));
+	font-size: 0.92em;
+	font-variant-numeric: tabular-nums;
+}
+
+.body {
+	flex: 1 1 auto;
+	min-width: 0;
+	padding-right: 12px;
+}
+
+.row.collapsed .body {
+	height: var(--row-height, 22px);
+	white-space: pre;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.pretty {
+	margin: 2px 0 6px;
+	padding: 0;
+	font-family: inherit;
+	font-size: inherit;
+	line-height: 1.5;
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+}
+
+.pretty.raw {
+	color: var(--vscode-descriptionForeground);
+}
+
+.pretty.error {
+	color: var(--vscode-errorForeground, #f14c4c);
+	white-space: pre-wrap;
+}
+
+.tok-key {
+	color: var(--vscode-debugTokenExpression-name, #9cdcfe);
+}
+
+.tok-str {
+	color: var(--vscode-debugTokenExpression-string, #ce9178);
+}
+
+.tok-num {
+	color: var(--vscode-debugTokenExpression-number, #b5cea8);
+}
+
+.tok-lit {
+	color: var(--vscode-debugTokenExpression-boolean, #569cd6);
+}
+
+.tok-punc {
+	color: var(--vscode-editor-foreground);
+	opacity: 0.7;
+}

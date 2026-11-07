@@ -1,0 +1,78 @@
+{
+  "name": "jsonl-for-vscode",
+  "displayName": "JSONL Viewer",
+  "description": "View JSONL/NDJSON files with collapsible per-line JSON.",
+  "version": "0.0.1",
+  "publisher": "historyliao",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Visualization",
+    "Other"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/historyliao/jsonl-for-vscode.git"
+  },
+  "keywords": [
+    "jsonl",
+    "ndjson",
+    "json lines",
+    "viewer"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "jsonlViewer.editor",
+        "displayName": "JSONL Viewer",
+        "selector": [
+          {
+            "filenamePattern": "*.jsonl"
+          },
+          {
+            "filenamePattern": "*.ndjson"
+          }
+        ],
+        "priority": "option"
+      }
+    ],
+    "commands": [
+      {
+        "command": "jsonlViewer.open",
+        "title": "Open with JSONL Viewer"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "jsonlViewer.open",
+          "when": "resourceExtname == .jsonl || resourceExtname == .ndjson",
+          "group": "navigation@10"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "jsonlViewer.open",
+        "key": "ctrl+alt+j",
+        "mac": "cmd+alt+j",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.24.0",
+    "typescript": "^5.4.0"
+  }
+}

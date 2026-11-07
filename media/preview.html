@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSONL Viewer preview</title>
+<link rel="stylesheet" href="style.css">
+<style>
+	/* Stand-in for the theme variables VS Code injects into a real webview. */
+	:root {
+		--vscode-editor-background: #1f1f1f;
+		--vscode-editor-foreground: #cccccc;
+		--vscode-foreground: #cccccc;
+		--vscode-descriptionForeground: #9d9d9d;
+		--vscode-editorLineNumber-foreground: #6e7681;
+		--vscode-textLink-foreground: #4daafc;
+		--vscode-list-hoverBackground: #2a2d2e;
+		--vscode-toolbar-hoverBackground: rgba(90, 93, 94, 0.31);
+		--vscode-panel-border: #2b2b2b;
+		--vscode-button-secondaryBackground: #313131;
+		--vscode-button-secondaryForeground: #cccccc;
+		--vscode-button-secondaryHoverBackground: #3c3c3c;
+		--vscode-debugTokenExpression-name: #9cdcfe;
+		--vscode-debugTokenExpression-string: #ce9178;
+		--vscode-debugTokenExpression-number: #b5cea8;
+		--vscode-debugTokenExpression-boolean: #569cd6;
+		--vscode-editor-font-family: "Menlo", "Consolas", monospace;
+		--vscode-editor-font-size: 13px;
+		--vscode-font-family: system-ui, sans-serif;
+	}
+</style>
+</head>
+<body>
+<div id="header">
+	<span id="name"></span>
+	<span id="count">loading…</span>
+	<button id="open-text" type="button">Open as Text</button>
+</div>
+<div id="viewport"><div id="layer"></div></div>
+<script>
+	const LINES = [
+		'{"id":1,"name":"alpha","tags":["a","b"],"active":true}',
+		'{"id":2,"name":"beta","nested":{"x":1,"y":[1,2,3]},"score":98.5}',
+		'{"id":3,"name":"gamma","payload":"' + 'x'.repeat(400) + '"}',
+		'{not valid json at all}',
+		'   ',
+		'{"id":5,"name":"epsilon","flags":{"a":false,"b":null},"count":0}',
+		'{"id":6,"name":"zeta","items":[{"k":"v"},{"k":"v2"}]}',
+		'{"id":7,"name":"eta","unicode":"中文内容","emoji":"\\u2728"}',
+		'{"id":8,"big":12345678901234567890,"exp":1e400,"dup":1,"dup":2}'
+	];
+	for (let i = 8; i <= 200; i++) {
+		LINES.push('{"id":' + i + ',"name":"row-' + i + '","value":' + (i * 37) + '}');
+	}
+
+	window.acquireVsCodeApi = function () {
+		return {
+			postMessage: function (message) {
+				if (message.type === 'ready') {
+					setTimeout(function () {
+						window.dispatchEvent(new MessageEvent('message', {
+							data: { type: 'init', name: 'sample.jsonl', lines: LINES }
+						}));
+					}, 0);
+				}
+			}
+		};
+	};
+</script>
+<script src="main.js"></script>
+</body>
+</html>
