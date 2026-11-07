@@ -1,9 +1,19 @@
 {
   "name": "jsonl-for-vscode",
   "displayName": "JSONL Viewer",
-  "description": "View JSONL/NDJSON files with collapsible per-line JSON.",
+  "description": "View JSONL/NDJSON (JSON Lines) files line by line: expand any record in place, with virtual scrolling for large files.",
   "version": "0.0.1",
   "publisher": "historyliao",
+  "license": "MIT",
+  "icon": "media/icon.png",
+  "homepage": "https://github.com/historyliao/jsonl-for-vscode#readme",
+  "bugs": {
+    "url": "https://github.com/historyliao/jsonl-for-vscode/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/historyliao/jsonl-for-vscode.git"
+  },
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -11,15 +21,17 @@
     "Visualization",
     "Other"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/historyliao/jsonl-for-vscode.git"
-  },
   "keywords": [
     "jsonl",
     "ndjson",
     "json lines",
-    "viewer"
+    "jsonl viewer",
+    "ndjson viewer",
+    "json",
+    "log viewer",
+    "dataset",
+    "large file",
+    "collapsible"
   ],
   "activationEvents": [],
   "main": "./out/extension.js",

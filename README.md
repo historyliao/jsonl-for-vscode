@@ -172,4 +172,10 @@ media/main.js      webview：虚拟列表、就地展开、JSON 高亮
 media/style.css    webview：主题变量与布局
 media/preview.html 仅开发用的独立预览页（不打包进 vsix）
 media/screenshot.png README 里的效果图
+media/icon.png     扩展图标（128×128）
+LICENSE            MIT 许可证
 ```
+
+## 许可证
+
+[MIT](LICENSE)
